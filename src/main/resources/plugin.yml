@@ -1,0 +1,15 @@
+name: EasyGamemodeChange
+version: ${project.version}
+main: mc.mec.easygamemodechange.EasyGamemodeChange
+api-version: 1.13
+author: Mr_El_Capitan
+commands:
+  0:
+  1:
+  2:
+  3:
+  gm:
+  creative:
+  adventure:
+  spectator:
+  survival:
