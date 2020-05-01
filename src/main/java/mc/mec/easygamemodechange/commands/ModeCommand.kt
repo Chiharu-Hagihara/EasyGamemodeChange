@@ -11,29 +11,29 @@ import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.entity.Player
 
 object ModeCommand : CommandExecutor {
-    val _prefix = "§b&l[EGC]"
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         val p = sender as Player
         if (sender is ConsoleCommandSender) {
             sender.sendMessage("This command can only be executed by a player.")
             return false
         }
-        if(p.hasPermission("egc.use")){
-            p.sendMessage("$_prefix §4§lYou don't have permission.")
-        }
-        when(cmd.name){
-            "creative" -> {
-                setCreative(p)
+        if (p.hasPermission("egc.use")) {
+            when (cmd.name) {
+                "creative" -> {
+                    setCreative(p)
+                }
+                "adventure" -> {
+                    setAdventure(p)
+                }
+                "spectator" -> {
+                    setSpectator(p)
+                }
+                "survival" -> {
+                    setSurvival(p)
+                }
             }
-            "adventure" -> {
-                setAdventure(p)
-            }
-            "spectator" -> {
-               setSpectator(p)
-            }
-            "survival" -> {
-                setSurvival(p)
-            }
+        } else {
+            p.sendMessage("§4§lYou don't have permission.")
         }
         return true
     }

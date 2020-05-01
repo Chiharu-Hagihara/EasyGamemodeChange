@@ -8,81 +8,92 @@ import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.entity.Player
 
 object GmCommand : CommandExecutor {
-    val _prefix = "§b&l[EGC]"
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val p = sender as Player
         if (sender is ConsoleCommandSender) {
             sender.sendMessage("This command can only be executed by a player.")
             return false
         }
-        if(p.hasPermission("egc.use")){
-            p.sendMessage("$_prefix §4§lYou don't have permission.")
-        }
-        if (command.name == "gm") {
-            val cmd = args[0]
-            if (args != null&& args.isEmpty()) {
-                showHelp(p)
+        if(p.hasPermission("egc.use")) {
+            if (command.name == "gm") {
+                when (args[0]) {
+                    "c" -> {
+                        setCreative(p)
+                    }
+                    "a" -> {
+                        setAdventure(p)
+                    }
+                    "sp" -> {
+                        setSpectator(p)
+                    }
+                    "s" -> {
+                        setSurvival(p)
+                    }
+                    "1" -> {
+                        setCreative(p)
+                    }
+                    "2" -> {
+                        setAdventure(p)
+                    }
+                    "3" -> {
+                        setSpectator(p)
+                    }
+                    "0" -> {
+                        setSurvival(p)
+                    }
+                    "creative" -> {
+                        setCreative(p)
+                    }
+                    "adventure" -> {
+                        setAdventure(p)
+                    }
+                    "spectator" -> {
+                        setSpectator(p)
+                    }
+                    "survival" -> {
+                        setSurvival(p)
+                    }
+                    else -> {
+                        showHelp(p)
+                    }
+                }
             }
-            when (cmd) {
-                "c" -> {
-                    setCreative(p)
-                }
-                "a" -> {
-                    setAdventure(p)
-                }
-                "sp" -> {
-                    setSpectator(p)
-                }
-                "s" -> {
-                    setSurvival(p)
-                }
-                "creative" -> {
-                    setCreative(p)
-                }
-                "adventure" -> {
-                    setAdventure(p)
-                }
-                "spectator" -> {
-                    setSpectator(p)
-                }
-                "survival" -> {
-                    setSurvival(p)
-                }
-            }
+        }else {
+            p.sendMessage("§4§lYou don't have permission.")
         }
         return true
     }
     fun showHelp(p: Player){
-        p.sendMessage("$_prefix §f/<1/2/3/0>")
-        p.sendMessage("$_prefix §f/gm <1/2/3/0>")
-        p.sendMessage("$_prefix §f/gm <c/a/sp/s>")
-        p.sendMessage("$_prefix §f/gm creative")
-        p.sendMessage("$_prefix §f/gm adventure")
-        p.sendMessage("$_prefix §f/gm spectator")
-        p.sendMessage("$_prefix §f/gm survival")
-        p.sendMessage("$_prefix §f/creative")
-        p.sendMessage("$_prefix §f/adventure")
-        p.sendMessage("$_prefix §f/spectator")
-        p.sendMessage("$_prefix §f/spectator")
+        p.sendMessage("§f/<1/2/3/0>")
+        p.sendMessage("§f/gm <1/2/3/0>")
+        p.sendMessage("§f/gm <c/a/sp/s>")
+        p.sendMessage("§f/gm creative")
+        p.sendMessage("§f/gm adventure")
+        p.sendMessage("§f/gm spectator")
+        p.sendMessage("§f/gm survival")
+        p.sendMessage("§f/creative")
+        p.sendMessage("§f/adventure")
+        p.sendMessage("§f/spectator")
+        p.sendMessage("§f/spectator")
     }
 
     fun setCreative(p: Player) {
         p.gameMode = GameMode.CREATIVE
-        p.sendMessage(_prefix + "ゲームモードをクリエイティブに変更しました。")
+        p.sendMessage("§6ゲームモードをクリエイティブに変更しました。")
     }
 
     fun setSurvival(p: Player) {
         p.gameMode = GameMode.SURVIVAL
-        p.sendMessage(_prefix + "ゲームモードをサバイバルに変更しました。")
+        p.sendMessage("§6ゲームモードをサバイバルに変更しました。")
     }
 
     fun setAdventure(p: Player) {
         p.gameMode = GameMode.ADVENTURE
-        p.sendMessage(_prefix + "ゲームモードをアドベンチャーに変更しました。")
+        p.sendMessage("§6ゲームモードをアドベンチャーに変更しました。")
     }
 
     fun setSpectator(p: Player) {
         p.gameMode = GameMode.SPECTATOR
-        p.sendMessage(_prefix + "ゲームモードをスペクテイターに変更しました。")
+        p.sendMessage("§6ゲームモードをスペクテイターに変更しました。")
     }
 }
